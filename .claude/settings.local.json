@@ -24,7 +24,26 @@
       "Bash(echo \"---lint exit=$?---\")",
       "Bash(echo \"lint exit=$?\")",
       "Bash(node dist/cli.js --list-rules)",
-      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && echo \"== typecheck ==\" && npx tsc --noEmit && echo OK && echo \"== lint ==\" && npx eslint src fixtures && echo OK && echo \"== test ==\" && npx vitest run 2>&1 | tail -4 && echo \"== build ==\" && npx tsup 2>&1 | tail -2)"
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && echo \"== typecheck ==\" && npx tsc --noEmit && echo OK && echo \"== lint ==\" && npx eslint src fixtures && echo OK && echo \"== test ==\" && npx vitest run 2>&1 | tail -4 && echo \"== build ==\" && npx tsup 2>&1 | tail -2)",
+      "Bash(node dist/cli.js nonexistent-command-xyz)",
+      "Bash(node dist/cli.js \"$\\(pwd\\)/node_modules/.bin/tsx fixtures/vulnerable-server.ts\" -r json)",
+      "Bash(echo \"json exit=$?\")",
+      "Bash(node -e \"const d=require\\('/tmp/out.json'\\); console.log\\('json valid, findings:', d.findings.length, 'first:', d.findings[0].ruleId\\)\")",
+      "Bash(node dist/cli.js \"$\\(pwd\\)/node_modules/.bin/tsx fixtures/vulnerable-server.ts\" -r sarif)",
+      "Bash(node -e \"const d=require\\('./out.json'\\); console.log\\('json valid, findings:', d.findings.length, 'first:', d.findings[0].ruleId\\)\")",
+      "Bash(echo \"sarif exit=$?\")",
+      "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('out.sarif','utf8'\\)\\); const r=d.runs[0]; console.log\\('sarif valid, version:', d.version, 'results:', r.results.length, 'rules:', r.tool.driver.rules.length, 'levels:', [...new Set\\(r.results.map\\(x=>x.level\\)\\)].join\\(','\\), 'ruleIndex ok:', r.results.every\\(x=>typeof x.ruleIndex==='number'\\)\\)\")",
+      "Bash(rm out.json out.sarif)",
+      "Bash(node dist/cli.js '__TRACKED_VAR__ fixtures/vulnerable-server.ts' --ignore poisoning/*,secrets/*,capability/*,schema/*,conformance/*)",
+      "Bash(echo \"all-ignored exit=$? \\(want 0\\)\")",
+      "Bash(node dist/cli.js '__TRACKED_VAR__ fixtures/vulnerable-server.ts' --fail-on critical)",
+      "Bash(echo \"fail-on-critical exit=$? \\(want 1, has criticals\\)\")",
+      "Bash(npx mcpvet *)",
+      "Bash(echo \"packed-cli scan exit=$? \\(want 1\\)\")",
+      "Bash(cd /tmp/mcpvet-install-test && npx mcpvet \"/c/Users/ckear/OneDrive/Documents/Fable/node_modules/.bin/tsx /c/Users/ckear/OneDrive/Documents/Fable/fixtures/vulnerable-server.ts\" 2>&1 | head -5)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && ls node_modules/@modelcontextprotocol/sdk/dist/esm/server/ | grep -i http)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && npx vitest run 2>&1 | tail -8)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && npx tsc --noEmit && echo \"typecheck OK\" && npx eslint src fixtures && echo \"lint OK\")"
     ]
   }
 }

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(curl -s -o /dev/null -w \"mcp-vet: %{http_code}\\\\n\" https://registry.npmjs.org/mcp-vet)",
+      "Bash(curl -s -o /dev/null -w \"mcpvet: %{http_code}\\\\n\" https://registry.npmjs.org/mcpvet)",
+      "Bash(curl -s -o /dev/null -w \"mcp-audit: %{http_code}\\\\n\" https://registry.npmjs.org/mcp-audit)"
+    ]
+  }
+}

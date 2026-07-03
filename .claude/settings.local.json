@@ -22,7 +22,9 @@
       "Bash(echo \"clean exit=$?\")",
       "Bash(npx eslint *)",
       "Bash(echo \"---lint exit=$?---\")",
-      "Bash(echo \"lint exit=$?\")"
+      "Bash(echo \"lint exit=$?\")",
+      "Bash(node dist/cli.js --list-rules)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && echo \"== typecheck ==\" && npx tsc --noEmit && echo OK && echo \"== lint ==\" && npx eslint src fixtures && echo OK && echo \"== test ==\" && npx vitest run 2>&1 | tail -4 && echo \"== build ==\" && npx tsup 2>&1 | tail -2)"
     ]
   }
 }

@@ -1,0 +1,6 @@
+{
+  "failOn": "medium",
+  "ignoreRules": [
+    "schema/additional-properties"
+  ]
+}

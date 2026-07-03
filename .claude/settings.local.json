@@ -4,7 +4,25 @@
       "WebSearch",
       "Bash(curl -s -o /dev/null -w \"mcp-vet: %{http_code}\\\\n\" https://registry.npmjs.org/mcp-vet)",
       "Bash(curl -s -o /dev/null -w \"mcpvet: %{http_code}\\\\n\" https://registry.npmjs.org/mcpvet)",
-      "Bash(curl -s -o /dev/null -w \"mcp-audit: %{http_code}\\\\n\" https://registry.npmjs.org/mcp-audit)"
+      "Bash(curl -s -o /dev/null -w \"mcp-audit: %{http_code}\\\\n\" https://registry.npmjs.org/mcp-audit)",
+      "Read(//c/Users/ckear/OneDrive/Documents/Fable/**)",
+      "Bash(npm install *)",
+      "Bash(ls \"/c/Users/ckear/OneDrive/Documents/Fable/node_modules/@modelcontextprotocol/sdk/dist/esm/client/\")",
+      "Bash(npx vitest *)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && npx vitest run 2>&1 | grep -B2 -A12 \"FAIL\\\\|AssertionError\" | head -60)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && npx vitest run 2>&1 | tail -5)",
+      "Bash(npx tsc *)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && npx vitest run 2>&1 | tail -30)",
+      "Bash(npx tsup *)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && npx tsup 2>&1 | grep -i \"error\\\\|\\\\.ts\" | head -20)",
+      "Bash(cd \"/c/Users/ckear/OneDrive/Documents/Fable\" && npx tsup 2>&1 | tail -6)",
+      "Bash(node dist/cli.js \"$\\(pwd\\)/node_modules/.bin/tsx fixtures/vulnerable-server.ts\")",
+      "Bash(echo \"exit=$?\")",
+      "Bash(node dist/cli.js \"$\\(pwd\\)/node_modules/.bin/tsx fixtures/clean-server.ts\")",
+      "Bash(echo \"clean exit=$?\")",
+      "Bash(npx eslint *)",
+      "Bash(echo \"---lint exit=$?---\")",
+      "Bash(echo \"lint exit=$?\")"
     ]
   }
 }

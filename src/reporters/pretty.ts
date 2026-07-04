@@ -38,7 +38,7 @@ export function renderPretty(result: ScanResult): string {
   const server = snapshot.probe.serverInfo;
   lines.push("");
   lines.push(
-    `${pc.bold("mcpvet")} ${pc.dim("scanned")} ${pc.bold(
+    `${pc.bold("vetmcp")} ${pc.dim("scanned")} ${pc.bold(
       server?.name ?? snapshot.target,
     )}${server?.version ? pc.dim(` v${server.version}`) : ""} ${pc.dim(
       `(${snapshot.transport}, ${snapshot.tools.length} tools, ${snapshot.resources.length} resources, ${snapshot.prompts.length} prompts)`,

@@ -1,4 +1,4 @@
-name: "mcpvet"
+name: "vetmcp"
 description: "Scan an MCP server for security issues (tool poisoning, leaked secrets, dangerous capabilities)."
 branding:
   icon: "shield"
@@ -21,16 +21,16 @@ inputs:
   sarif-file:
     description: "Path to also write a SARIF report to (for upload to the Security tab). Empty to skip."
     required: false
-    default: "mcpvet.sarif"
+    default: "vetmcp.sarif"
   version:
-    description: "npm version/tag of mcpvet to run."
+    description: "npm version/tag of vetmcp to run."
     required: false
     default: "latest"
 
 runs:
   using: "composite"
   steps:
-    - name: Run mcpvet
+    - name: Run vetmcp
       shell: bash
       run: |
         args=("${{ inputs.target }}")
@@ -39,8 +39,8 @@ runs:
         args+=(--fail-on "${{ inputs.fail-on }}")
 
         if [ -n "${{ inputs.sarif-file }}" ]; then
-          npx --yes "mcpvet@${{ inputs.version }}" "${args[@]}" --reporter sarif > "${{ inputs.sarif-file }}" || true
+          npx --yes "vetmcp@${{ inputs.version }}" "${args[@]}" --reporter sarif > "${{ inputs.sarif-file }}" || true
         fi
 
         # Human-readable output + authoritative exit code.
-        npx --yes "mcpvet@${{ inputs.version }}" "${args[@]}"
+        npx --yes "vetmcp@${{ inputs.version }}" "${args[@]}"

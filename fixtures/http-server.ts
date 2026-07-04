@@ -1,5 +1,5 @@
 /**
- * A minimal HTTP (streamable) MCP server used to exercise mcpvet's http
+ * A minimal HTTP (streamable) MCP server used to exercise vetmcp's http
  * transport. Stateless mode: a fresh transport per request. Insecure on
  * purpose (leaks a token) so a finding is expected.
  */
@@ -8,7 +8,9 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
 
-const PORT = Number(process.env.PORT ?? 39217);
+// PORT=0 (the test default) lets the OS pick a free port; the chosen port is
+// announced on stdout so the test can read it back.
+const PORT = Number(process.env.PORT ?? 0);
 
 function buildServer(): McpServer {
   const server = new McpServer({ name: "http-demo", version: "2.0.0" });
@@ -37,5 +39,7 @@ const httpServer = createServer((req, res) => {
 });
 
 httpServer.listen(PORT, () => {
-  process.stdout.write(`listening ${PORT}\n`);
+  const address = httpServer.address();
+  const port = typeof address === "object" && address ? address.port : PORT;
+  process.stdout.write(`listening ${port}\n`);
 });

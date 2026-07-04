@@ -1,6 +1,6 @@
 /**
  * A well-behaved MCP server: honest descriptions, typed and constrained
- * schemas, no dangerous capabilities. mcpvet should report zero findings.
+ * schemas, no dangerous capabilities. vetmcp should report zero findings.
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";

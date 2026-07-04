@@ -1,5 +1,5 @@
 /**
- * An intentionally insecure MCP server used to prove mcpvet fires on real
+ * An intentionally insecure MCP server used to prove vetmcp fires on real
  * problems. DO NOT copy this into a real server — every tool here is a bug.
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";

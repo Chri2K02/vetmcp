@@ -1,4 +1,4 @@
-/** Loads .mcpvetrc.json from the working directory, merged with CLI flags. */
+/** Loads .vetmcprc.json from the working directory, merged with CLI flags. */
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { ScanConfig, Severity } from "./types.js";
@@ -14,7 +14,7 @@ export function parseSeverity(value: string): Severity {
 }
 
 export async function loadConfig(cwd: string): Promise<ScanConfig> {
-  const file = path.join(cwd, ".mcpvetrc.json");
+  const file = path.join(cwd, ".vetmcprc.json");
   let raw: string;
   try {
     raw = await readFile(file, "utf8");

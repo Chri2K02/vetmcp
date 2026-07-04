@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * mcpvet CLI.
+ * vetmcp CLI.
  *
  * Exit codes: 0 = clean (below fail threshold), 1 = findings at/above
  * threshold, 2 = scan could not run (connection/config error).
@@ -16,7 +16,7 @@ import { allRules } from "./rules/index.js";
 const program = new Command();
 
 program
-  .name("mcpvet")
+  .name("vetmcp")
   .description(
     "Security scanner for MCP servers — npm audit for the Model Context Protocol.",
   )
@@ -88,7 +88,7 @@ program
       process.exitCode = shouldFail(result, config.failOn) ? 1 : 0;
     } catch (error) {
       console.error(
-        pc.red(`mcpvet: ${error instanceof Error ? error.message : String(error)}`),
+        pc.red(`vetmcp: ${error instanceof Error ? error.message : String(error)}`),
       );
       process.exitCode = 2;
     }

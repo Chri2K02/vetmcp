@@ -44,7 +44,7 @@ describe("pretty reporter", () => {
 describe("json reporter", () => {
   it("emits valid JSON with findings and surface counts", () => {
     const parsed = JSON.parse(renderJson(dirtyResult()));
-    expect(parsed.tool).toBe("mcpvet");
+    expect(parsed.tool).toBe("vetmcp");
     expect(parsed.surface.tools).toBe(1);
     expect(parsed.findings.length).toBeGreaterThan(0);
     expect(parsed.findings[0]).toHaveProperty("ruleId");
@@ -57,7 +57,7 @@ describe("sarif reporter", () => {
     const parsed = JSON.parse(renderSarif(dirtyResult(), allRules));
     expect(parsed.version).toBe("2.1.0");
     const run = parsed.runs[0];
-    expect(run.tool.driver.name).toBe("mcpvet");
+    expect(run.tool.driver.name).toBe("vetmcp");
     expect(run.results.length).toBeGreaterThan(0);
     const ruleIds = new Set(
       run.tool.driver.rules.map((r: { id: string }) => r.id),

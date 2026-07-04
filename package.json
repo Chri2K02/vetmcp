@@ -1,5 +1,5 @@
 {
-  "name": "mcpvet",
+  "name": "vetmcp",
   "version": "0.1.0",
   "description": "Security scanner for MCP servers — npm audit for the Model Context Protocol",
   "keywords": [
@@ -13,21 +13,21 @@
     "cli"
   ],
   "license": "MIT",
-  "author": "",
-  "homepage": "https://github.com/mcpvet/mcpvet#readme",
+  "author": "Chri2K02 <ckearns2002@gmail.com>",
+  "homepage": "https://github.com/vetmcp/vetmcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mcpvet/mcpvet.git"
+    "url": "git+https://github.com/vetmcp/vetmcp.git"
   },
   "bugs": {
-    "url": "https://github.com/mcpvet/mcpvet/issues"
+    "url": "https://github.com/vetmcp/vetmcp/issues"
   },
   "publishConfig": {
     "access": "public"
   },
   "type": "module",
   "bin": {
-    "mcpvet": "dist/cli.js"
+    "vetmcp": "dist/cli.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

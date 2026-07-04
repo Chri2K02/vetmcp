@@ -1,4 +1,4 @@
-# Contributing to mcpvet
+# Contributing to vetmcp
 
 The most valuable contribution is **a new rule**. The architecture is built so
 that adding one is small and self-contained.

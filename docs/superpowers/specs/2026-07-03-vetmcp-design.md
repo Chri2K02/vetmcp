@@ -1,18 +1,18 @@
-# mcpvet — Security Scanner for MCP Servers
+# vetmcp — Security Scanner for MCP Servers
 
 **Date:** 2026-07-03
 **Status:** Approved
 
 ## Summary
 
-`mcpvet` is an open-source CLI that scans Model Context Protocol (MCP) servers for
+`vetmcp` is an open-source CLI that scans Model Context Protocol (MCP) servers for
 security risks — the way `npm audit` scans dependencies. It connects to a target
 server over the real MCP protocol, captures a snapshot of its advertised surface
 (tools, resources, prompts, schemas), runs a set of security rules against that
 snapshot, and reports findings with severities and remediation guidance. A non-zero
 exit code on findings makes it a drop-in CI quality gate.
 
-Usage: `npx mcpvet <target>` where target is a stdio command or an HTTP URL.
+Usage: `npx vetmcp <target>` where target is a stdio command or an HTTP URL.
 
 ## Goals
 
@@ -35,7 +35,7 @@ Usage: `npx mcpvet <target>` where target is a stdio command or an HTTP URL.
 
 The official `@modelcontextprotocol/inspector` is a manual debugging GUI. Existing
 test runners (mcp-server-tester etc.) focus on functional testing and are immature.
-No polished tool owns "is this MCP server safe to ship?". mcpvet owns that.
+No polished tool owns "is this MCP server safe to ship?". vetmcp owns that.
 
 ## Rule Set (v1)
 
@@ -62,7 +62,7 @@ src/
   engine.ts    — runs rules over snapshot, applies config (ignores, severity
                  threshold), aggregates ScanResult
   reporters/   — pretty (terminal, default) | json | sarif (2.1.0)
-  cli.ts       — arg parsing, config loading (.mcpvetrc.json), exit codes
+  cli.ts       — arg parsing, config loading (.vetmcprc.json), exit codes
 fixtures/
   vulnerable-server/  — intentionally insecure MCP server (e2e test target)
   clean-server/       — well-behaved MCP server (no-findings baseline)
@@ -96,7 +96,7 @@ code (`0` clean, `1` findings at/above `--fail-on` threshold, `2` scan error).
 ## Stack
 
 TypeScript / Node ≥ 20, `@modelcontextprotocol/sdk`, commander (CLI), picocolors
-(terminal output), vitest, tsup, published to npm as `mcpvet` (verified available).
+(terminal output), vitest, tsup, published to npm as `vetmcp` (verified available).
 
 ## Launch checklist (post-v1)
 

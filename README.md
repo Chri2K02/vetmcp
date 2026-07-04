@@ -1,23 +1,23 @@
-# mcpvet
+# vetmcp
 
 > `npm audit` for MCP servers. Point it at any Model Context Protocol server and it reports the security problems in its tools, resources, and prompts — tool poisoning, leaked secrets, dangerous capabilities, and more.
 
-[![CI](https://github.com/mcpvet/mcpvet/actions/workflows/ci.yml/badge.svg)](https://github.com/mcpvet/mcpvet/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/mcpvet.svg)](https://www.npmjs.com/package/mcpvet)
+[![CI](https://github.com/vetmcp/vetmcp/actions/workflows/ci.yml/badge.svg)](https://github.com/vetmcp/vetmcp/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/vetmcp.svg)](https://www.npmjs.com/package/vetmcp)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 MCP servers ship tools straight into an LLM's context. A malicious or careless
 server can hide instructions in a tool description, leak an API key in its
 metadata, or expose a shell command to the model — and the official Inspector
-won't tell you. `mcpvet` connects over the real MCP protocol, snapshots
+won't tell you. `vetmcp` connects over the real MCP protocol, snapshots
 everything the server advertises, and runs security rules against it.
 
 ```bash
-npx mcpvet "node my-server.js"
+npx vetmcp "node my-server.js"
 ```
 
 ```
-mcpvet scanned my-server v1.2.0 (stdio, 6 tools, 2 resources, 0 prompts)
+vetmcp scanned my-server v1.2.0 (stdio, 6 tools, 2 resources, 0 prompts)
 
   CRITICAL poisoning/injection-phrase
            Instruction-override phrase found in tool "get_weather" (description).
@@ -47,10 +47,10 @@ straight into CI.
 
 ```bash
 # one-off
-npx mcpvet <target>
+npx vetmcp <target>
 
 # or install
-npm install -g mcpvet
+npm install -g vetmcp
 ```
 
 Requires Node 20+.
@@ -60,9 +60,9 @@ Requires Node 20+.
 The target is either a **stdio command** or an **http(s) URL**:
 
 ```bash
-mcpvet "node dist/server.js"           # stdio (spawns the command)
-mcpvet "python -m my_mcp_server"       # stdio
-mcpvet https://my-host.example.com/mcp # streamable HTTP
+vetmcp "node dist/server.js"           # stdio (spawns the command)
+vetmcp "python -m my_mcp_server"       # stdio
+vetmcp https://my-host.example.com/mcp # streamable HTTP
 ```
 
 ### Options
@@ -78,7 +78,7 @@ mcpvet https://my-host.example.com/mcp # streamable HTTP
 
 ### Config file
 
-Drop a `.mcpvetrc.json` in your project root:
+Drop a `.vetmcprc.json` in your project root:
 
 ```json
 {
@@ -122,21 +122,21 @@ jobs:
       - run: npm ci && npm run build
 
       - name: Scan MCP server
-        run: npx mcpvet "node dist/server.js" --reporter sarif > mcpvet.sarif
+        run: npx vetmcp "node dist/server.js" --reporter sarif > vetmcp.sarif
         continue-on-error: true
 
       - uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: mcpvet.sarif
+          sarif_file: vetmcp.sarif
 
       - name: Fail on findings
-        run: npx mcpvet "node dist/server.js" --fail-on high
+        run: npx vetmcp "node dist/server.js" --fail-on high
 ```
 
 ## Programmatic API
 
 ```ts
-import { captureSnapshot, runRules, allRules, shouldFail } from "mcpvet";
+import { captureSnapshot, runRules, allRules, shouldFail } from "vetmcp";
 
 const snapshot = await captureSnapshot("node server.js");
 const result = runRules(snapshot, allRules);
@@ -158,6 +158,21 @@ The **connector** is the only component that touches the network or spawns a
 process. It produces a normalized `ServerSnapshot`. Every **rule** is a pure
 function `(snapshot) => Finding[]` — no I/O, trivially testable, and easy to
 contribute. See [CONTRIBUTING.md](CONTRIBUTING.md) to add one.
+
+## Security notes (read before scanning)
+
+- **Scanning a stdio server runs it.** vetmcp spawns the target command as a
+  child process to speak MCP to it. If you don't trust the server's code, that
+  is already the threat — run the scan in a container/VM, or scan its hosted
+  HTTP endpoint instead.
+- **Findings are signals, not proof.** Rules are static heuristics over what
+  the server *advertises*. A clean report does not certify a server as safe —
+  a malicious server can hide behavior behind honest-looking metadata
+  (rug pulls), and a noisy-but-honest server can trip heuristics. Treat vetmcp
+  as one layer, not a substitute for code review or sandboxing.
+- **Evidence is redacted, but reports can still be sensitive.** JSON/SARIF
+  output includes tool names, descriptions, and finding excerpts from the
+  scanned server. Review before sharing publicly.
 
 ## Roadmap
 

@@ -4,7 +4,7 @@ import type { ScanResult } from "../types.js";
 export function renderJson(result: ScanResult): string {
   return JSON.stringify(
     {
-      tool: "mcpvet",
+      tool: "vetmcp",
       version: 1,
       target: result.snapshot.target,
       transport: result.snapshot.transport,

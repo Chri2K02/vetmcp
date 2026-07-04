@@ -55,7 +55,7 @@ export async function captureSnapshot(
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const maxPreviews = options.maxResourcePreviews ?? DEFAULT_MAX_PREVIEWS;
 
-  const client = new Client({ name: "mcpvet", version: "0.1.0" });
+  const client = new Client({ name: "vetmcp", version: "0.1.0" });
   const transport =
     spec.transport === "stdio"
       ? new StdioClientTransport({

@@ -35,7 +35,7 @@ export function renderSarif(result: ScanResult, rules: Rule[]): string {
       name: rule.meta.name,
       shortDescription: { text: rule.meta.name },
       fullDescription: { text: rule.meta.description },
-      helpUri: `https://github.com/mcpvet/mcpvet/blob/main/docs/rules.md#${rule.meta.id.replace("/", "")}`,
+      helpUri: `https://github.com/vetmcp/vetmcp/blob/main/docs/rules.md#${rule.meta.id.replace("/", "")}`,
       properties: {
         "security-severity": SECURITY_SEVERITY[rule.meta.defaultSeverity],
         tags: ["security", "mcp"],
@@ -77,8 +77,8 @@ export function renderSarif(result: ScanResult, rules: Rule[]): string {
       {
         tool: {
           driver: {
-            name: "mcpvet",
-            informationUri: "https://github.com/mcpvet/mcpvet",
+            name: "vetmcp",
+            informationUri: "https://github.com/vetmcp/vetmcp",
             version: "0.1.0",
             rules: sarifRules,
           },

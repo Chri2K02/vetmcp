@@ -12,15 +12,18 @@ import { allRules } from "../src/rules/index.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const tsx = path.join(here, "..", "node_modules", ".bin", "tsx");
+const serverScript = path.join(here, "http-server.ts");
 const PORT = 39231;
 
 let child: ChildProcess;
 
 beforeAll(async () => {
-  child = spawn(tsx, [path.join(here, "http-server.ts")], {
+  // Single shell string (no separate args array) so the cross-platform .bin
+  // shim runs without triggering the DEP0190 shell-with-args warning.
+  child = spawn(`"${tsx}" "${serverScript}"`, {
     env: { ...process.env, PORT: String(PORT) },
     stdio: ["ignore", "pipe", "ignore"],
-    shell: process.platform === "win32",
+    shell: true,
   });
   await new Promise<void>((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error("server did not start")), 15_000);

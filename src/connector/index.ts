@@ -72,8 +72,19 @@ export async function captureSnapshot(
     errors: [],
   };
 
+  // Fail fast if the transport closes before the handshake finishes (e.g. the
+  // stdio child exits immediately), instead of waiting out the full timeout.
+  const closedEarly = new Promise<never>((_, reject) => {
+    transport.onclose = () =>
+      reject(new Error("transport closed before initialize completed"));
+  });
+
   try {
-    await withTimeout(client.connect(transport), timeoutMs, "initialize");
+    await withTimeout(
+      Promise.race([client.connect(transport), closedEarly]),
+      timeoutMs,
+      "initialize",
+    );
   } catch (error) {
     await client.close().catch(() => {});
     throw new Error(
@@ -81,6 +92,8 @@ export async function captureSnapshot(
       { cause: error },
     );
   }
+  // Hand the close handler back to the SDK now that we are connected.
+  transport.onclose = undefined;
 
   probe.initialized = true;
   const serverVersion = client.getServerVersion();

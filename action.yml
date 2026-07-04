@@ -1,0 +1,46 @@
+name: "mcpvet"
+description: "Scan an MCP server for security issues (tool poisoning, leaked secrets, dangerous capabilities)."
+branding:
+  icon: "shield"
+  color: "purple"
+
+inputs:
+  target:
+    description: 'MCP server target: a stdio command ("node server.js") or an http(s) URL.'
+    required: true
+  transport:
+    description: "Force transport: stdio | http. Inferred from the target when omitted."
+    required: false
+  fail-on:
+    description: "Minimum severity that fails the job: critical | high | medium | low | info."
+    required: false
+    default: "medium"
+  ignore:
+    description: "Comma-separated rule IDs or category/* globs to skip."
+    required: false
+  sarif-file:
+    description: "Path to also write a SARIF report to (for upload to the Security tab). Empty to skip."
+    required: false
+    default: "mcpvet.sarif"
+  version:
+    description: "npm version/tag of mcpvet to run."
+    required: false
+    default: "latest"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run mcpvet
+      shell: bash
+      run: |
+        args=("${{ inputs.target }}")
+        [ -n "${{ inputs.transport }}" ] && args+=(--transport "${{ inputs.transport }}")
+        [ -n "${{ inputs.ignore }}" ] && args+=(--ignore "${{ inputs.ignore }}")
+        args+=(--fail-on "${{ inputs.fail-on }}")
+
+        if [ -n "${{ inputs.sarif-file }}" ]; then
+          npx --yes "mcpvet@${{ inputs.version }}" "${args[@]}" --reporter sarif > "${{ inputs.sarif-file }}" || true
+        fi
+
+        # Human-readable output + authoritative exit code.
+        npx --yes "mcpvet@${{ inputs.version }}" "${args[@]}"

@@ -12,6 +12,7 @@ import { captureSnapshot } from "./connector/index.js";
 import { runRules, shouldFail } from "./engine.js";
 import { render, type ReporterName } from "./reporters/index.js";
 import { allRules } from "./rules/index.js";
+import { VERSION } from "./version.js";
 
 const program = new Command();
 
@@ -20,7 +21,7 @@ program
   .description(
     "Security scanner for MCP servers — npm audit for the Model Context Protocol.",
   )
-  .version("0.1.0")
+  .version(VERSION)
   .argument(
     "[target]",
     'stdio command ("node server.js") or http(s) URL of the MCP server',

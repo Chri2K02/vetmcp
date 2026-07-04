@@ -6,4 +6,5 @@ export { DEFAULT_CONFIG, isRuleIgnored, runRules, shouldFail } from "./engine.js
 export { render, renderJson, renderPretty, renderSarif } from "./reporters/index.js";
 export type { ReporterName } from "./reporters/index.js";
 export { allRules } from "./rules/index.js";
+export { VERSION } from "./version.js";
 export * from "./types.js";

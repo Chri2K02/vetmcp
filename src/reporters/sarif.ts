@@ -3,6 +3,7 @@
  * code-scanning upload (github/codeql-action/upload-sarif).
  */
 import type { Finding, Rule, ScanResult, Severity } from "../types.js";
+import { VERSION } from "../version.js";
 
 const SARIF_LEVEL: Record<Severity, "error" | "warning" | "note"> = {
   critical: "error",
@@ -79,7 +80,7 @@ export function renderSarif(result: ScanResult, rules: Rule[]): string {
           driver: {
             name: "vetmcp",
             informationUri: "https://github.com/vetmcp/vetmcp",
-            version: "0.1.0",
+            version: VERSION,
             rules: sarifRules,
           },
         },

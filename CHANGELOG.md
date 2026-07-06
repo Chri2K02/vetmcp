@@ -6,6 +6,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-07-06
+
 ### Added
 - Initial release of `vetmcp`, a security scanner for MCP servers.
 - Connector supporting **stdio** and **streamable HTTP** transports.

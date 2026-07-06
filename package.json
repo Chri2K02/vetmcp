@@ -14,13 +14,13 @@
   ],
   "license": "MIT",
   "author": "Chri2K02 <ckearns2002@gmail.com>",
-  "homepage": "https://github.com/vetmcp/vetmcp#readme",
+  "homepage": "https://github.com/Chri2K02/vetmcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vetmcp/vetmcp.git"
+    "url": "git+https://github.com/Chri2K02/vetmcp.git"
   },
   "bugs": {
-    "url": "https://github.com/vetmcp/vetmcp/issues"
+    "url": "https://github.com/Chri2K02/vetmcp/issues"
   },
   "publishConfig": {
     "access": "public"

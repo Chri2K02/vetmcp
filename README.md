@@ -2,7 +2,7 @@
 
 > `npm audit` for MCP servers. Point it at any Model Context Protocol server and it reports the security problems in its tools, resources, and prompts — tool poisoning, leaked secrets, dangerous capabilities, and more.
 
-[![CI](https://github.com/vetmcp/vetmcp/actions/workflows/ci.yml/badge.svg)](https://github.com/vetmcp/vetmcp/actions/workflows/ci.yml)
+[![CI](https://github.com/Chri2K02/vetmcp/actions/workflows/ci.yml/badge.svg)](https://github.com/Chri2K02/vetmcp/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/vetmcp.svg)](https://www.npmjs.com/package/vetmcp)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
